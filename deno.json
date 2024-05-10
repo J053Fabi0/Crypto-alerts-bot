@@ -1,0 +1,19 @@
+{
+  "tasks": {
+    "stop": "pm2 stop cryptoalert",
+    "start": "pm2 start --interpreter='deno' --interpreter-args='run --unstable-cron --unstable-kv -A' --name cryptoalert index.ts && pm2 logs cryptoalert",
+    "logs": "pm2 logs cryptoalert",
+    "reload": "pm2 reload cryptoalert && pm2 logs cryptoalert",
+    "check": "deno check index.ts caller/index.ts",
+    "run": "deno run --unstable-kv --unstable-cron -A index.ts",
+    "dev": "deno run --unstable-kv --unstable-cron --watch -A index.ts",
+    "watch": "deno run --unstable-kv --unstable-cron --watch -A index.ts",
+    "update_deps": "deno run -A https://deno.land/x/molt/cli.ts deno.json -w"
+  },
+  "imports": {
+    "axiod": "https://deno.land/x/axiod@0.26.2/mod.ts",
+    "grammy": "https://deno.land/x/grammy@v1.23.0/mod.ts",
+    "std/": "https://deno.land/std@0.224.0/",
+    "kvdex": "jsr:@olli/kvdex@^1.0.1"
+  }
+}
