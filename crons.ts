@@ -1,3 +1,4 @@
+import { EVERY } from "./env.ts";
 import checkAlert from "./checkAlert.ts";
 
-Deno.cron("check", { minute: { every: 3 } }, checkAlert);
+Deno.cron("check", { minute: { every: EVERY } }, checkAlert);

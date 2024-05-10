@@ -7,6 +7,10 @@ url.searchParams.append("vs_currencies", "usd");
 url.searchParams.append("x_cg_demo_api_key", API_KEY);
 
 export default async function getPrice(): Promise<number> {
+  // for testing purposes
+  const fakePrice = await Deno.readTextFile("price.txt").catch(() => null);
+  if (fakePrice) return +fakePrice;
+
   const { data } = await axiod.get<{ [x: string]: { usd: number } }>(url.toString());
 
   return data[TOKEN_ID].usd;

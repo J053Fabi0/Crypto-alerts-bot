@@ -12,6 +12,8 @@
   },
   "imports": {
     "axiod": "https://deno.land/x/axiod@0.26.2/mod.ts",
+    "escapeHtml": "https://deno.land/x/escape_html@1.0.0/mod.ts",
+    "math": "https://deno.land/x/math@v1.1.0/mod.ts",
     "grammy": "https://deno.land/x/grammy@v1.23.0/mod.ts",
     "std/": "https://deno.land/std@0.224.0/",
     "kvdex": "jsr:@olli/kvdex@^1.0.1"
