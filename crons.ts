@@ -1,3 +1,3 @@
-import getAlert from "./getAlert.ts";
+import checkAlert from "./checkAlert.ts";
 
-Deno.cron("check", { minute: { every: 3 } }, getAlert);
+Deno.cron("check", { minute: { every: 3 } }, checkAlert);

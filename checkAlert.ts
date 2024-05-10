@@ -3,7 +3,7 @@ import { bot } from "./index.ts";
 import { ADMIN_ID } from "./env.ts";
 import getPrice from "./getPrice.ts";
 
-export default async function getAlert(): Promise<void> {
+export default async function checkAlert(): Promise<void> {
   const alertPrice = await db.alertPrice.getOne();
   const alertType = await db.alertType.getOne();
   if (!alertPrice || !alertType) return;
