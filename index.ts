@@ -1,6 +1,6 @@
 import "./crons.ts";
 import db from "./db.ts";
-import { Bot } from "grammy";
+import { Bot, GrammyError, HttpError } from "grammy";
 import { ADMIN_ID, BOT_TOKEN } from "./env.ts";
 import getPrice from "./getPrice.ts";
 
@@ -34,6 +34,21 @@ bot.command("set", async (ctx) => {
 bot.command("price", async (ctx) => {
   const price = await getPrice();
   await ctx.reply(`Price: $${price}`);
+});
+
+bot.catch(async (err) => {
+  await bot.api.sendMessage(ADMIN_ID, `Error`).catch(() => {});
+
+  const ctx = err.ctx;
+  console.error(`Error while handling update ${ctx.update.update_id}:`);
+  const e = err.error;
+  if (e instanceof GrammyError) {
+    console.error("Error in request:", e.description);
+  } else if (e instanceof HttpError) {
+    console.error("Could not contact Telegram:", e);
+  } else {
+    console.error("Unknown error:", e);
+  }
 });
 
 bot.start({
