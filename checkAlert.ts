@@ -46,7 +46,7 @@ export default async function checkAlert(): Promise<void> {
 
   const alertText = price.eq(alertPrice.value)
     ? "exactly"
-    : alertType.value === AlertType.gte
+    : alertType.value === AlertType.gte || newAlert === AlertType.lte
     ? "above"
     : "bellow";
 
