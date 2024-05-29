@@ -23,9 +23,7 @@ bot.command("set", async (ctx) => {
   const price = +text.split(" ")[1];
 
   if (isNaN(price)) return howToUse();
-  const type = price > currentPrice ? AlertType.gte : AlertType.lte;
-
-  if (price === currentPrice) return ctx.reply("Price is already at that value!");
+  const type = price === currentPrice ? AlertType.neq : price > currentPrice ? AlertType.gte : AlertType.lte;
 
   await db.alertPrice.deleteMany();
   await db.alertPrice.add(price);
@@ -35,7 +33,7 @@ bot.command("set", async (ctx) => {
 
   ctx.reply(
     `Alert when price is ${escapeHtml(alertTypeToText(type))} <code>$${price}</code>.\n\n` +
-      `Current price: <code>$${currentPrice}</code>.`,
+      (type === AlertType.neq ? "" : `Current price: <code>$${currentPrice}</code>.`),
     { parse_mode: "HTML" }
   );
 });
