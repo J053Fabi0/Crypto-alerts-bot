@@ -45,15 +45,15 @@ export default async function checkAlert(): Promise<void> {
   await db.alertType.add(newAlert);
 
   const alertText = price.eq(alertPrice.value)
-    ? "exactly"
+    ? "exactly ⬜️"
     : alertType.value === AlertType.gte || newAlert === AlertType.lte
-    ? "above"
-    : "bellow";
+    ? "above 🟩"
+    : "bellow 🟥";
 
   await bot.api.sendMessage(
     ADMIN_ID,
     `Price is ${alertText} <code>$${alertPrice.value}</code>!\n` +
-      (alertText === "exactly" ? "" : `Current price: <code>$${price.toString()}</code>.\n`) +
+      (alertText === "exactly ⬜️" ? "" : `Current price: <code>$${price.toString()}</code>.\n`) +
       `\nNext alert will be when price is ${escapeHtml(alertTypeToText(newAlert))} ` +
       `<code>$${alertPrice.value}</code>.`,
     { parse_mode: "HTML" }
